@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CANIFA_DBModelStoreContainer" CdmEntityContainer="DB_CANIFAEntities">
+    <EntitySetMapping Name="AnhSanPham">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.AnhSanPham">
+        <MappingFragment StoreEntitySet="AnhSanPham">
+          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="LinkAnh" ColumnName="LinkAnh" />
+          <ScalarProperty Name="LaAnhDaiDien" ColumnName="LaAnhDaiDien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChiTietSanPham">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.ChiTietSanPham">
+        <MappingFragment StoreEntitySet="ChiTietSanPham">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
+          <ScalarProperty Name="MaSize" ColumnName="MaSize" />
+          <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DanhMuc">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.DanhMuc">
+        <MappingFragment StoreEntitySet="DanhMuc">
+          <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+          <ScalarProperty Name="MaDM" ColumnName="MaDM" />
+          <ScalarProperty Name="TenDM" ColumnName="TenDM" />
+          <ScalarProperty Name="Slug" ColumnName="Slug" />
+          <ScalarProperty Name="MaCha" ColumnName="MaCha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KichCo">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.KichCo">
+        <MappingFragment StoreEntitySet="KichCo">
+          <ScalarProperty Name="MaSize" ColumnName="MaSize" />
+          <ScalarProperty Name="TenSize" ColumnName="TenSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KhuyenMai">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.KhuyenMai">
+        <MappingFragment StoreEntitySet="KhuyenMai">
+          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+          <ScalarProperty Name="DonToiThieu" ColumnName="DonToiThieu" />
+          <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
+          <ScalarProperty Name="MaCode" ColumnName="MaCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenVoucher" ColumnName="TenVoucher" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
+          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MauSac">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.MauSac">
+        <MappingFragment StoreEntitySet="MauSac">
+          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
+          <ScalarProperty Name="TenMau" ColumnName="TenMau" />
+          <ScalarProperty Name="MaHex" ColumnName="MaHex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SanPham">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.SanPham">
+        <MappingFragment StoreEntitySet="SanPham">
+          <ScalarProperty Name="IsFreeship" ColumnName="IsFreeship" />
+          <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="SKU_Code" ColumnName="SKU_Code" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="Slug" ColumnName="Slug" />
+          <ScalarProperty Name="GiaGoc" ColumnName="GiaGoc" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="PhanTramGiam" ColumnName="PhanTramGiam" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="ChatLieu" ColumnName="ChatLieu" />
+          <ScalarProperty Name="HuongDanSD" ColumnName="HuongDanSD" />
+          <ScalarProperty Name="MaDM_Chinh" ColumnName="MaDM_Chinh" />
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SanPham_DanhMuc" TypeName="CANIFA_DBModel.SanPham_DanhMuc" StoreEntitySet="SanPham_DanhMuc">
+      <EndProperty Name="DanhMuc">
+        <ScalarProperty Name="MaDM" ColumnName="MaDM" />
+      </EndProperty>
+      <EndProperty Name="SanPham">
+        <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="ChiTietDonHang">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.ChiTietDonHang">
+        <MappingFragment StoreEntitySet="ChiTietDonHang">
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="MaSize" ColumnName="MaSize" />
+          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonHang">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.DonHang">
+        <MappingFragment StoreEntitySet="DonHang">
+          <ScalarProperty Name="DiaChiGiaoHang" ColumnName="DiaChiGiaoHang" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KhachHang">
+      <EntityTypeMapping TypeName="CANIFA_DBModel.KhachHang">
+        <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8b8d452e255400e9587a22a1c282e06" Name="Diagram1">
+        <EntityTypeShape EntityType="CANIFA_DBModel.AnhSanPham" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.ChiTietDonHang" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.ChiTietSanPham" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.DanhMuc" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.DonHang" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.KichCo" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.KhachHang" Width="1.5" PointX="3.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.KhuyenMai" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.MauSac" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CANIFA_DBModel.SanPham" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__AnhSanPha__MaMau__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__AnhSanPham__MaSP__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietDo__MaMau__367C1819" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietDo__MaSiz__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietDon__MaDH__3493CFA7" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietDon__MaSP__3587F3E0" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietSa__MaMau__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietSa__MaSiz__2BFE89A6" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__ChiTietSan__MaSP__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK_SanPham_DanhMuc" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.FK__DonHang__MaKH__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="CANIFA_DBModel.SanPham_DanhMuc" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

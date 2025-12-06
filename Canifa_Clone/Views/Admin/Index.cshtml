@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Bảng điều khiển";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-white" style="background: linear-gradient(45deg, #4e54c8, #8f94fb);">
+            <div class="card-body">
+                <h6 class="text-uppercase mb-2">Tổng doanh thu</h6>
+                <h3 class="fw-bold">125.000.000 ₫</h3>
+                <small><i class="fa-solid fa-arrow-up"></i> +15% so với tháng trước</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-white" style="background: linear-gradient(45deg, #11998e, #38ef7d);">
+            <div class="card-body">
+                <h6 class="text-uppercase mb-2">Đơn hàng mới</h6>
+                <h3 class="fw-bold">45</h3>
+                <small>Chờ xử lý</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-white" style="background: linear-gradient(45deg, #ff9966, #ff5e62);">
+            <div class="card-body">
+                <h6 class="text-uppercase mb-2">Sản phẩm</h6>
+                <h3 class="fw-bold">120</h3>
+                <small>Đang hoạt động</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm text-white" style="background: linear-gradient(45deg, #3a7bd5, #00d2ff);">
+            <div class="card-body">
+                <h6 class="text-uppercase mb-2">Khách hàng</h6>
+                <h3 class="fw-bold">1,250</h3>
+                <small>Thành viên mới</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h6 class="mb-0 fw-bold">Đơn hàng vừa đặt</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã ĐH</th>
+                            <th>Khách hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#DH001</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>06/12/2025</td>
+                            <td>599.000 ₫</td>
+                            <td><span class="badge bg-warning">Chờ duyệt</span></td>
+                        </tr>
+                        <tr>
+                            <td>#DH002</td>
+                            <td>Trần Thị B</td>
+                            <td>05/12/2025</td>
+                            <td>1.250.000 ₫</td>
+                            <td><span class="badge bg-success">Đã giao</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

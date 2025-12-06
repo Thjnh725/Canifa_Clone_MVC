@@ -1,0 +1,257 @@
+﻿/* Màu nền  Menu Canifa  */
+.bg-dark-canifa {
+    background-color: #333f48; 
+}
+
+/* Style  Menu items */
+.main-menu .nav-link {
+    font-size: 14px;
+    padding: 12px 15px; 
+    border-bottom: 3px solid transparent; 
+    transition: all 0.3s;
+}
+
+    .main-menu .nav-link:hover {
+        background-color: #4a5b66; 
+        border-bottom: 3px solid #d7202c;
+    }
+
+/* Tùy chỉnh ô tìm kiếm cho giống hình (Bo góc nhẹ, focus không bị xanh) */
+.input-group-text {
+    background-color: white !important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+/* Biểu tượng (Icon) */
+.fa-store, .fa-user, .fa-bag-shopping {
+    color: #333f48;
+}
+
+/* --- FOOTER STYLES --- */
+
+/* Màu nền xám đậm của Footer (Lấy đúng mã màu từ ảnh) */
+.bg-footer-dark {
+    background-color: #303841;
+    color: #fff;
+}
+
+/* Link trong Footer */
+.footer-link {
+    color: #aeb4b9; /* Màu chữ xám nhạt */
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: block;
+    transition: color 0.2s;
+}
+
+    .footer-link:hover {
+        color: #fff; /* Hover sáng lên */
+    }
+
+/* Tiêu đề cột (Thương hiệu, Hỗ trợ...) */
+.footer-heading {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Dòng thông tin công ty nhỏ */
+.footer-info {
+    font-size: 12px;
+    color: #aeb4b9;
+    line-height: 1.8;
+}
+
+/* Icon Mạng xã hội */
+.social-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #fff;
+}
+
+/* Các phương thức thanh toán (Dùng font-size để chỉnh to nhỏ icon) */
+.payment-icon {
+    font-size: 28px;
+    margin-right: 10px;
+    color: #fff;
+}
+
+/* Nút mũi tên lên đầu trang & Chat */
+.floating-btn {
+    position: fixed;
+    right: 20px;
+    z-index: 1000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.btn-chat {
+    bottom: 80px;
+    background-color: #303841;
+    color: white;
+}
+
+.btn-top {
+    bottom: 20px;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+/* --- PRODUCT LIST STYLES --- */
+/* =============================
+   TABS DANH MỤC
+============================= */
+.category-tabs .btn {
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    border: 1px solid #e1e1e1;
+}
+
+    .category-tabs .btn.active,
+    .category-tabs .btn:hover {
+        background-color: #333f48;
+        color: white;
+        border-color: #333f48;
+    }
+
+/* =============================
+   PRODUCT CARD
+============================= */
+.product-card {
+    transition: all 0.3s ease;
+}
+
+    .product-card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+    }
+
+/* Khung hình */
+.product-img-container {
+    position: relative;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+/* Ảnh sản phẩm */
+.product-card .card-img-top {
+    transition: transform 0.5s ease;
+    mix-blend-mode: multiply;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+/* =============================
+   NÚT THÊM GIỎ HÀNG GÓC DƯỚI
+============================= */
+.btn-cart-quick {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d7202c;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 2;
+}
+
+.product-card:hover .btn-cart-quick {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =============================
+   NÚT THÊM GIỎ HÀNG (BUTTON TRÒN)
+============================= */
+.btn-quick-add {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    border: none;
+    z-index: 3;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+    .btn-quick-add:hover {
+        transform: scale(1.1);
+        background-color: #f8f9fa;
+    }
+
+    .btn-quick-add i {
+        color: #333;
+        font-size: 14px;
+    }
+
+    .btn-quick-add .fa-plus {
+        position: absolute;
+        bottom: 8px;
+        right: 6px;
+        font-size: 8px;
+        color: #d7202c;
+        font-weight: bold;
+    }
+
+/* =============================
+   BADGE FREESHIP
+============================= */
+.badge-freeship {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background-color: #d7202c;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    z-index: 2;
+    box-shadow: -2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* =============================
+   ẢNH THUMBNAIL MÀU SẮC
+============================= */
+.color-thumb {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+    .color-thumb:hover {
+        border-color: #333;
+    }

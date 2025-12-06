@@ -1,0 +1,156 @@
+﻿@using Canifa_Clone.Models
+@model List<ProductHomeVM>
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- =======================
+       BANNER SLIDER
+======================== -->
+<div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Content/Images/banner/banner1.png" class="d-block w-100" />
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/Images/banner/banner2.png" class="d-block w-100" />
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/Images/banner/banner3.png" class="d-block w-100" />
+        </div>
+    </div>
+
+    <button class="carousel-control-prev custom-control" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="custom-icon"><i class="fa-solid fa-chevron-left"></i></span>
+    </button>
+    <button class="carousel-control-next custom-control" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="custom-icon"><i class="fa-solid fa-chevron-right"></i></span>
+    </button>
+</div>
+
+@Html.Action("KhuyenMaiPartial", "Home")
+<!-- =======================
+        SẢN PHẨM MỚI
+======================== -->
+<div class="container my-5">
+
+    <div class="d-flex flex-column align-items-start mb-4 gap-3">
+
+        <h2 class="fw-bold text-uppercase mb-0">SẢN PHẨM MỚI</h2>
+
+        <div class="category-tabs">
+            <a href="#" class="btn btn-outline-dark active">TẤT CẢ</a>
+            <a href="#" class="btn btn-outline-dark">NỮ</a>
+            <a href="#" class="btn btn-outline-dark">NAM</a>
+            <a href="#" class="btn btn-outline-dark">BÉ GÁI</a>
+            <a href="#" class="btn btn-outline-dark">BÉ TRAI</a>
+        </div>
+
+    </div>
+    <!-- GRID SẢN PHẨM -->
+    <div class="container-fluid px-0">
+
+        <div class="d-flex flex-nowrap overflow-auto gap-3 pb-3" style="scroll-behavior: smooth;">
+
+            @foreach (var p in Model)
+            {
+                <div class="col-10 col-md-4 col-lg-3 flex-shrink-0">
+                    <div class="card product-card h-100 position-relative">
+
+                        <a href="/Product/Detail/@p.MaSP">
+                            <img id="main-@p.MaSP"
+                                 src="~/Content/@p.AnhChinh"
+                                 class="card-img-top w-100"
+                                 style="background:#f7f7f7; height:320px; object-fit:cover;"
+                                 alt="@p.TenSP" />
+                        </a>
+
+                        <div class="card-body px-2 pt-2 pb-0">
+                            <a href="/Product/Detail/@p.MaSP" class="text-decoration-none text-dark">
+                                <h6 class="card-title text-truncate fw-normal mb-1" style="font-size:15px;">
+                                    @p.TenSP
+                                </h6>
+                            </a>
+
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-dark">@String.Format("{0:N0}", p.GiaBan) ₫</span>
+                                @if (p.GiaGoc > p.GiaBan)
+                                {
+                                    <span class="text-decoration-line-through text-muted" style="font-size:12px;">
+                                        @String.Format("{0:N0}", p.GiaGoc) ₫
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="px-2 pb-2 d-flex align-items-center gap-1">
+                            <div class="d-flex gap-1">
+                                @foreach (var img in p.ListAnhDaiDienTheoMau)
+                                {
+                                    <img src="~/Content/@img"
+                                         class="thumb-mau border"
+                                         data-main="main-@p.MaSP"
+                                         data-img="/Content/@img"
+                                         style="width:36px;height:36px;object-fit:cover;cursor:pointer;border-radius:3px;"
+                                         onerror="this.src='/Content/Images/no-image.jpg'" />
+                                }
+                            </div>
+
+                            <a href="@Url.Action("ThemGioHang", "GioHang", new { maSP = p.MaSP })"
+                               class="btn btn-light rounded-circle border ms-auto d-flex align-items-center justify-content-center text-primary shadow-sm btn-add-cart"
+                               style="width: 36px; height: 36px; transition: all 0.2s;"
+                               title="Thêm vào giỏ">
+                                <i class="fa fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="text-end mt-4">
+        <a href="#" class="btn btn-outline-dark px-5 py-2 fw-bold text-uppercase">
+            Xem thêm <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+    </div>
+</div>
+
+
+<!-- =======================
+      SCRIPT ĐỔI ẢNH MÀU
+======================== -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        document.querySelectorAll(".thumb-mau").forEach(el => {
+
+            el.addEventListener("click", function () {
+
+                let mainImg = document.getElementById(this.dataset.main);
+
+                if (mainImg) {
+                    mainImg.src = this.dataset.img;
+                }
+
+                // Border UI
+                this.parentElement.querySelectorAll(".thumb-mau").forEach(i => {
+                    i.style.border = "1px solid #ccc";
+                });
+
+                this.style.border = "2px solid #000";
+            });
+
+        });
+
+    });
+</script>
