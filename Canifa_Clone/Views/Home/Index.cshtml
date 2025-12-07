@@ -6,6 +6,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .canifa-banner-wrapper {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .canifa-banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+</style>
+
 <!-- =======================
        BANNER SLIDER
 ======================== -->
@@ -48,7 +64,7 @@
         <h2 class="fw-bold text-uppercase mb-0">SẢN PHẨM MỚI</h2>
 
         <div class="category-tabs">
-            <a href="#" class="btn btn-outline-dark active">TẤT CẢ</a>
+            @Html.ActionLink( "TẤT CẢ", "SanPhamMoi","SanPham", null,new { @class = "btn btn-outline-dark active" })
             <a href="#" class="btn btn-outline-dark">NỮ</a>
             <a href="#" class="btn btn-outline-dark">NAM</a>
             <a href="#" class="btn btn-outline-dark">BÉ GÁI</a>
@@ -119,10 +135,15 @@
     </div>
 
     <div class="text-end mt-4">
-        <a href="#" class="btn btn-outline-dark px-5 py-2 fw-bold text-uppercase">
-            Xem thêm <i class="fa-solid fa-arrow-right ms-2"></i>
-        </a>
+        @Html.ActionLink( "Xem thêm   →","SanPhamMoi", "SanPham", null,new{@class = "btn btn-outline-dark px-5 py-2 fw-bold text-uppercase"})
     </div>
+
+</div>
+
+<div class="canifa-banner-wrapper">
+    <img src="~/Content/Images/layout/NTPMM_collection_desktop-201125.png"
+         class="canifa-banner-img"
+         alt="Banner" />
 </div>
 
 
@@ -142,7 +163,6 @@
                     mainImg.src = this.dataset.img;
                 }
 
-                // Border UI
                 this.parentElement.querySelectorAll(".thumb-mau").forEach(i => {
                     i.style.border = "1px solid #ccc";
                 });

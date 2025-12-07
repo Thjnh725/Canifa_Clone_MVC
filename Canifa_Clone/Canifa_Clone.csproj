@@ -155,6 +155,7 @@
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="DanhMuc.cs">
       <DependentUpon>Canifa_DB.tt</DependentUpon>
     </Compile>
@@ -177,6 +178,8 @@
       <DependentUpon>Canifa_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BienTheGroupMau.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\KhuyenMai_db.cs" />
     <Compile Include="Models\ProductDetailVM.cs" />
     <Compile Include="Models\ProductHomeVM.cs" />
@@ -2461,6 +2464,11 @@
     <Content Include="Content\Images\banner\banner1.png" />
     <Content Include="Content\Images\banner\banner2.png" />
     <Content Include="Content\Images\banner\banner3.png" />
+    <Content Include="Content\Images\banner\istockphoto-1050662758-612x612.jpg" />
+    <Content Include="Content\Images\banner\istockphoto-1142399373-612x612.jpg" />
+    <Content Include="Content\Images\banner\istockphoto-1300966679-612x612.jpg" />
+    <Content Include="Content\Images\banner\istockphoto-1363627613-612x612.jpg" />
+    <Content Include="Content\Images\banner\istockphoto-956002732-612x612.jpg" />
     <Content Include="Content\Images\layout\application-images.25712b3.png" />
     <Content Include="Content\Images\layout\maqr.jpg" />
     <Content Include="Content\Images\layout\NTPMM_collection_desktop-201125.png" />
@@ -2510,6 +2518,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Home\KhuyenMaiPartial.cshtml" />
+    <Content Include="Views\SanPham\SanPhamMoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,356 @@
+﻿@model Canifa_Clone.Models.HomeViewModel
+@{
+    ViewBag.Title = "Sản phẩm mới - Canifa Clone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* 1. Banner & General */
+    .hero-banner {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        object-fit: cover;
+    }
+
+    .page-title {
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #333;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* 2. Top Category Grid */
+    .category-card {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+        .category-card img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+
+    .category-label {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+
+    /* 3. Sidebar Filter (Cột trái) */
+    /* [MỚI] Class này giúp Sidebar dính lại khi cuộn */
+    .sidebar-wrapper {
+        position: -webkit-sticky; /* Cho Safari */
+        position: sticky;
+        top: 20px; /* Cách mép trên màn hình 20px */
+        z-index: 10; /* Đè lên các thành phần khác nếu cần */
+        height: fit-content; /* Chỉ chiếm chiều cao vừa đủ nội dung */
+    }
+
+    .filter-section h6 {
+        font-size: 15px; /* Tăng size chữ tiêu đề filter xíu */
+        margin-bottom: 0;
+        padding: 15px 0;
+        cursor: pointer;
+    }
+
+    /* [ĐÃ SỬA] Size Grid Style */
+    .size-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* 6 cột */
+        gap: 10px; /* [Tăng] Khoảng cách giữa các ô xa hơn chút */
+        margin-bottom: 15px;
+    }
+
+    .size-option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 1 / 1; /* Hình vuông */
+        border: 1px solid #e5e5e5;
+        border-radius: 4px; /* Bo góc mềm mại hơn */
+        background-color: #fff;
+        color: #333;
+        /* [TĂNG KÍCH THƯỚC Ở ĐÂY] */
+        font-size: 14px; /* Tăng từ 12px -> 14px */
+        font-weight: 600; /* Chữ đậm hơn cho rõ */
+
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+        .size-option:hover {
+            border-color: #000;
+            transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi di chuột */
+        }
+
+        .size-option.active {
+            border-color: #000;
+            background-color: #333; /* Đổi nền đen */
+            color: #fff; /* Chữ trắng cho nổi bật hẳn */
+            font-weight: 700;
+        }
+
+    /* Color Filter Style */
+    .color-option {
+        width: 28px; /* [Tăng] To hơn xíu */
+        height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid #ddd;
+    }
+
+        .color-option.active {
+            box-shadow: 0 0 0 2px white, 0 0 0 3px black;
+        }
+
+    /* 4. Product Card */
+    .product-card {
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .product-img-box {
+        position: relative;
+        background: #f4f4f4;
+        overflow: hidden;
+    }
+
+    .badge-freeship {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: #ff3b30;
+        color: white;
+        font-size: 10px;
+        padding: 3px 6px;
+        border-radius: 2px;
+        font-weight: bold;
+    }
+
+    .variant-img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+
+        .variant-img:hover {
+            border-color: #000;
+        }
+</style>
+
+<div class="page-new-products">
+
+    <div class="container-fluid p-0">
+        <img src="~/Content/Images/banner/banner1.png" class="hero-banner" />
+    </div>
+
+    <div class="container mt-3">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent p-0">
+                <li class="breadcrumb-item"><a href="/" class="text-secondary text-decoration-none">Trang chủ</a></li>
+                <li class="breadcrumb-item active fw-bold">Sản phẩm mới</li>
+            </ol>
+        </nav>
+
+        <h2 class="fw-bold text-uppercase page-title">Sản phẩm mới</h2>
+
+        <div class="row row-cols-2 row-cols-md-5 g-2 mb-4">
+            @foreach (var c in Model.Categories)
+            {
+                <div class="col">
+                    <div class="category-card">
+                        <a href="@c.Link">
+                            <img src="@Url.Content(c.ImageUrl)" />
+                            <span class="category-label">@c.Title</span>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row position-relative">
+            <div class="col-lg-3 col-md-4">
+                <div class="sidebar-wrapper">
+
+                    <h6 class="fw-bold d-flex justify-content-between pt-2" data-bs-toggle="collapse" data-bs-target="#collapseGender">
+                        Giới <i class="fas fa-minus small"></i>
+                    </h6>
+                    <div class="collapse show mb-4" id="collapseGender">
+                        <div class="form-check"><input class="form-check-input" type="checkbox" id="g1"><label class="form-check-label" for="g1">Nam</label></div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox" id="g2"><label class="form-check-label" for="g2">Nữ</label></div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox" id="g3"><label class="form-check-label" for="g3">Bé trai</label></div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox" id="g4"><label class="form-check-label" for="g4">Bé gái</label></div>
+                    </div>
+
+                    <h6 class="fw-bold mb-2">Kích cỡ</h6>
+                    <div class="size-grid mb-4">
+                        <div class="size-option">XS</div> <div class="size-option">S</div>
+                        <div class="size-option">M</div> <div class="size-option">L</div>
+                        <div class="size-option">XL</div> <div class="size-option">XXL</div>
+                        <div class="size-option">26</div> <div class="size-option">27</div>
+                        <div class="size-option">28</div> <div class="size-option">29</div>
+                        <div class="size-option">30</div> <div class="size-option">31</div>
+                        <div class="size-option">32</div> <div class="size-option">33</div>
+                        <div class="size-option">90</div> <div class="size-option">92</div>
+                        <div class="size-option">98</div> <div class="size-option">100</div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold m-0">Danh sách sản phẩm</h5>
+                    <div class="text-secondary small">Hiển thị @Model.NewProducts.Count sản phẩm</div>
+                </div>
+
+                <div class="row row-cols-2 row-cols-md-3 g-3">
+
+                    @foreach (var p in Model.NewProducts)
+                    {
+                        <div class="col-10 col-md-4 col-lg-3 flex-shrink-0 product-item">
+                            <div class="card product-card h-100 position-relative">
+
+                                <!-- Ảnh chính -->
+                                <a href="/Product/Detail/@p.MaSP">
+                                    <img id="main-@p.MaSP"
+                                         src="@Url.Content("~/Content/" + p.AnhChinh)"
+                                         class="card-img-top w-100"
+                                         style="background:#f7f7f7; height:320px; object-fit:cover;"
+                                         alt="@p.TenSP" />
+                                </a>
+
+                                <!-- Tên + Giá -->
+                                <div class="card-body px-2 pt-2 pb-0">
+                                    <a href="/Product/Detail/@p.MaSP" class="text-decoration-none text-dark">
+                                        <h6 class="card-title text-truncate fw-normal mb-1" style="font-size:15px;">
+                                            @p.TenSP
+                                        </h6>
+                                    </a>
+
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fw-bold text-dark">@String.Format("{0:N0}", p.GiaBan) ₫</span>
+
+                                        @if (p.GiaGoc > p.GiaBan)
+                                        {
+                                            <span class="text-decoration-line-through text-muted" style="font-size:12px;">
+                                                @String.Format("{0:N0}", p.GiaGoc) ₫
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- Thumbnail đổi màu + nút giỏ -->
+                                <div class="px-2 pb-2 d-flex align-items-center gap-1">
+                                    <div class="d-flex gap-1">
+                                        @foreach (var img in p.ListAnhDaiDienTheoMau)
+                                        {
+                                            <img src="@Url.Content("~/Content/" + img)"
+                                                 class="thumb-mau border"
+                                                 data-main="main-@p.MaSP"
+                                                 data-img="@Url.Content("~/Content/" + img)"
+                                                 style="width:36px;height:36px; object-fit:cover; cursor:pointer; border-radius:3px;"
+                                                 onerror="this.src='/Content/Images/no-image.jpg'" />
+                                        }
+                                    </div>
+
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { maSP = p.MaSP })"
+                                       class="btn btn-light rounded-circle border ms-auto d-flex align-items-center justify-content-center text-primary shadow-sm btn-add-cart"
+                                       style="width: 36px; height: 36px; transition: all 0.2s;"
+                                       title="Thêm vào giỏ">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+                <div class="text-center w-100 mt-3">
+                    <button id="btn-load-more" class="btn btn-outline-dark px-4 py-2 fw-bold">
+                        Xem thêm
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            /* ======================
+               LOAD MORE SẢN PHẨM
+            ====================== */
+
+            const items = document.querySelectorAll(".product-item");
+            const btnLoadMore = document.getElementById("btn-load-more");
+
+            let itemsToShow = 12;      // Hiển thị ban đầu
+            const itemsIncrement = 12; // Số lượng mỗi lần bấm
+
+            function updateVisibility() {
+                items.forEach((item, index) => {
+                    item.style.display = index < itemsToShow ? "block" : "none";
+                });
+
+                // Ẩn nút nếu không còn sản phẩm để load
+                if (itemsToShow >= items.length) {
+                    btnLoadMore.style.display = "none";
+                }
+            }
+
+            updateVisibility(); // Khởi tạo
+
+            btnLoadMore.addEventListener("click", () => {
+                itemsToShow += itemsIncrement;
+                updateVisibility();
+            });
+
+
+            /* ======================
+               CHỌN SIZE
+            ====================== */
+            document.querySelectorAll(".size-option").forEach(option => {
+                option.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                });
+            });
+
+
+            /* ======================
+               ĐỔI ẢNH MÀU SẢN PHẨM
+            ====================== */
+            document.querySelectorAll(".thumb-mau").forEach(thumb => {
+                thumb.addEventListener("click", function () {
+                    let mainId = this.dataset.main;
+                    let mainImg = document.getElementById(mainId);
+                    if (mainImg) mainImg.src = this.dataset.img;
+                });
+            });
+
+        });
+    </script>

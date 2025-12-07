@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-// Giả định DB_CANIFAEntities và các Models đã được định nghĩa
+
 
 namespace Canifa_Clone.Controllers
 {
@@ -51,8 +51,6 @@ namespace Canifa_Clone.Controllers
 
         public ActionResult KhuyenMaiPartial()
         {
-            // Giả sử db là DbContext của bạn
-            // Lấy các khuyến mãi chưa hết hạn
             var listKM = db.KhuyenMai
                            .Where(x => x.NgayHetHan >= DateTime.Now)
                            .OrderBy(x => x.NgayHetHan)

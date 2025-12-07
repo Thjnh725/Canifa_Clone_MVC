@@ -100,7 +100,10 @@
         <div class="bg-dark-canifa text-white">
             <div class="container">
                 <ul class="nav main-menu justify-content-start">
-                    <li class="nav-item"><a href="#" class="nav-link text-white fw-bold text-uppercase">Sản phẩm mới</a></li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Sản phẩm mới", "SanPhamMoi", "SanPham", null, new { @class = "nav-link text-white fw-bold text-uppercase" })
+                    </li>
+
                     <li class="nav-item"><a href="#" class="nav-link text-white fw-bold text-uppercase">Nữ</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white fw-bold text-uppercase">Nam</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white fw-bold text-uppercase">Bé gái</a></li>
