@@ -1,0 +1,68 @@
+@model Canifa_Clone.Models.RegisterVM
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class="text-center fw-bold mb-4 text-uppercase">Đăng ký tài khoản</h3>
+                
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Họ và tên</label>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Nhập họ tên đầy đủ" })
+                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Email</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập email liên hệ" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Mật khẩu</label>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Tối thiểu 6 ký tự" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Xác nhận mật khẩu</label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Nhập lại mật khẩu" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Số điện thoại</label>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Địa chỉ</label>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn" })
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100 py-3 fw-bold text-uppercase mt-3">Tạo tài khoản</button>
+                    
+                    <div class="text-center mt-4">
+                        <span class="text-muted small">Bạn đã có tài khoản?</span>
+                        <a href="@Url.Action("Login", "Account")" class="text-danger small fw-bold text-decoration-none ms-1">Đăng nhập</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+    .card { border-radius: 8px; }
+    .form-control:focus { border-color: #000; box-shadow: none; }
+</style>

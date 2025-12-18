@@ -153,7 +153,9 @@
     <Compile Include="ChiTietSanPham.cs">
       <DependentUpon>Canifa_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="DanhMuc.cs">
@@ -177,6 +179,7 @@
     <Compile Include="MauSac.cs">
       <DependentUpon>Canifa_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\BienTheGroupMau.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -2512,6 +2515,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -2519,6 +2525,10 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Home\KhuyenMaiPartial.cshtml" />
     <Content Include="Views\SanPham\SanPhamMoi.cshtml" />
+    <Content Include="Views\SanPham\AnhNuClick.cshtml" />
+    <Content Include="Views\SanPham\AnhNamClick.cshtml" />
+    <Content Include="Views\SanPham\AnhBeTraiClick.cshtml" />
+    <Content Include="Views\SanPham\AnhBeGaiClick.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

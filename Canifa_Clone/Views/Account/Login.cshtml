@@ -1,0 +1,53 @@
+@model Canifa_Clone.Models.LoginVM
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class="text-center fw-bold mb-4 text-uppercase">Đăng nhập</h3>
+                
+                @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3 small" })
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-uppercase">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập email của bạn" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-uppercase">Mật khẩu</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                            <label class="form-check-label small" for="RememberMe">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a href="#" class="small text-decoration-none text-muted">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100 py-2 fw-bold text-uppercase mb-3">Đăng nhập</button>
+                    
+                    <div class="text-center mt-3">
+                        <span class="text-muted small">Bạn chưa có tài khoản?</span>
+                        <a href="@Url.Action("Register", "Account")" class="text-danger small fw-bold text-decoration-none ms-1">Đăng ký ngay</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+    .card { border-radius: 8px; }
+    .form-control:focus { border-color: #000; box-shadow: none; }
+</style>

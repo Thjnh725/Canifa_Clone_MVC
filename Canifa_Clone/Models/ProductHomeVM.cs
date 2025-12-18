@@ -7,7 +7,7 @@ namespace Canifa_Clone.Models
 {
     public class ProductHomeVM
     {
-        public int MaSP { get; set; }
+        public int? MaSP { get; set; }
         public string TenSP { get; set; }
         public decimal? GiaBan { get; set; }
         public decimal? GiaGoc { get; set; }

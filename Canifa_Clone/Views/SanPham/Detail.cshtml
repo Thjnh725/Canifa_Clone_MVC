@@ -1,0 +1,308 @@
+@model Canifa_Clone.Models.ProductDetailVM
+@{
+    ViewBag.Title = Model.TenSP + " - Canifa Clone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var selectedMau = Model.DsMau?.FirstOrDefault(m => m.IsSelected) ?? Model.DsMau?.FirstOrDefault();
+    var currentMauId = selectedMau?.MaMau ?? 0;
+}
+
+<style>
+    .product-detail-page {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 15px;
+    }
+
+    .pd-images-container {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .pd-main-image-wrapper {
+        flex: 1;
+    }
+
+    .pd-main-image {
+        width: 100%;
+        height: auto;
+        max-height: 650px;
+        object-fit: contain;
+        border: 1px solid #f0f0f0;
+        background: #fff;
+    }
+
+    .pd-thumbnails-side {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 80px;
+        max-height: 650px;
+        overflow-y: auto;
+    }
+
+    .pd-thumbnails-side::-webkit-scrollbar { width: 0; }
+
+    .pd-thumb {
+        width: 70px;
+        height: 95px;
+        object-fit: cover;
+        border: 1px solid #eee;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .pd-thumb:hover, .pd-thumb.active { border-color: #000; }
+
+    .pd-info-wrapper { padding-left: 20px; }
+
+    .pd-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #000;
+        text-transform: uppercase;
+    }
+
+    .pd-sku { color: #888; font-size: 13px; margin-bottom: 20px; }
+
+    .pd-price-box {
+        margin: 20px 0;
+        display: flex;
+        align-items: baseline;
+    }
+
+    .pd-price-current {
+        font-size: 28px;
+        font-weight: 700;
+        color: #d32f2c;
+    }
+
+    .pd-price-old {
+        font-size: 16px;
+        color: #999;
+        text-decoration: line-through;
+        margin-left: 15px;
+    }
+
+    .pd-option-label {
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: block;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .pd-color-list {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .pd-color-item {
+        width: 55px;
+        height: 75px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        overflow: hidden;
+        transition: 0.2s;
+    }
+
+    .pd-color-item.active, .pd-color-item:hover { border-color: #000; }
+    .pd-color-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    .pd-size-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .pd-size-item {
+        padding: 10px 5px;
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+        background: #fff;
+        font-size: 14px;
+        color: #333;
+        transition: 0.2s;
+    }
+
+    .pd-size-item:hover { border-color: #000; }
+    .pd-size-item.active { background: #000; color: #fff; border-color: #000; }
+    .pd-size-item.disabled { opacity: 0.3; cursor: not-allowed; background: #f9f9f9; text-decoration: line-through; }
+
+    .pd-qty-box { display: flex; align-items: center; margin-bottom: 30px; }
+    .pd-qty-btn {
+        width: 40px; height: 40px; border: 1px solid #ddd; background: #fff;
+        font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .pd-qty-input {
+        width: 60px; height: 40px; border: 1px solid #ddd; border-left: none; border-right: none;
+        text-align: center; font-size: 16px;
+    }
+
+    .pd-add-to-cart {
+        width: 100%;
+        padding: 16px;
+        background: #d32f2c;
+        color: #fff !important;
+        border: none;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .pd-add-to-cart:hover { background: #b71c1c; }
+    .pd-add-to-cart:disabled { background: #e0e0e0; color: #999 !important; cursor: not-allowed; }
+
+    .pd-description { margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee; }
+    .pd-description h5 { font-weight: 700; margin-bottom: 12px; font-size: 16px; text-transform: uppercase; }
+    .pd-description p { color: #666; font-size: 15px; white-space: pre-line; }
+</style>
+
+<div class="product-detail-page">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="pd-images-container">
+                <div class="pd-main-image-wrapper">
+                    <img id="mainImg" src="@Url.Content("~/Content/" + (Model.AnhChinh ?? ""))" alt="@Model.TenSP" class="pd-main-image" />
+                </div>
+                <div class="pd-thumbnails-side">
+                    @if (selectedMau?.DanhSachAnh != null)
+                    {
+                        foreach (var img in selectedMau.DanhSachAnh)
+                        {
+                            <img src="@Url.Content("~/Content/" + img)" 
+                                 class="pd-thumb @(img == selectedMau.AnhDaiDien ? "active" : "")" 
+                                 onclick="document.getElementById('mainImg').src=this.src; document.querySelectorAll('.pd-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');" />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="pd-info-wrapper">
+                <h1 class="pd-title">@Model.TenSP</h1>
+                <div class="pd-sku">Mã sản phẩm: @Model.SKU_Code</div>
+
+                <div class="pd-price-box">
+                    <span class="pd-price-current">@String.Format("{0:N0}", Model.GiaBan) đ</span>
+                    @if (Model.GiaGoc > Model.GiaBan)
+                    {
+                        <span class="pd-price-old">@String.Format("{0:N0}", Model.GiaGoc) đ</span>
+                    }
+                </div>
+
+                <span class="pd-option-label">Màu sắc: @(selectedMau?.TenMau)</span>
+                <div class="pd-color-list">
+                    @if (Model.DsMau != null)
+                    {
+                        foreach (var mau in Model.DsMau)
+                        {
+                            var isActive = mau.MaMau == currentMauId;
+                            <a href="@Url.Action("Detail", "SanPham", new { id = Model.MaSP, maMau = mau.MaMau })" 
+                               class="pd-color-item @(isActive ? "active" : "")">
+                                <img src="@Url.Content("~/Content/" + (mau.AnhDaiDien ?? mau.DanhSachAnh?.FirstOrDefault()))" alt="@mau.TenMau" />
+                            </a>
+                        }
+                    }
+                </div>
+
+                <form id="addToCartForm" action="@Url.Action("AddToCart", "Cart")" method="post">
+                    <input type="hidden" name="maSP" value="@Model.MaSP" />
+                    <input type="hidden" name="maMau" value="@currentMauId" />
+                    <input type="hidden" name="maSize" id="sizeInput" value="" />
+
+                    <span class="pd-option-label">Kích cỡ:</span>
+                    <div class="pd-size-grid">
+                        @if (selectedMau?.DanhSachSize != null)
+                        {
+                            foreach (var s in selectedMau.DanhSachSize)
+                            {
+                                <div class="pd-size-item @(s.IsAvailable ? "" : "disabled")" 
+                                     data-size="@s.MaSize"
+                                     onclick="if(!this.classList.contains('disabled')){ document.getElementById('sizeInput').value=this.dataset.size; document.querySelectorAll('.pd-size-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); document.getElementById('addBtn').disabled=false; }">
+                                    @s.TenSize
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <span class="pd-option-label">Số lượng:</span>
+                    <div class="pd-qty-box">
+                        <button type="button" class="pd-qty-btn" onclick="var i=document.getElementById('qty'); if(i.value>1) i.value--;">-</button>
+                        <input type="number" id="qty" name="soLuong" value="1" min="1" class="pd-qty-input" readonly />
+                        <button type="button" class="pd-qty-btn" onclick="document.getElementById('qty').value++;">+</button>
+                    </div>
+
+                    <button type="submit" id="addBtn" class="pd-add-to-cart" disabled>THÊM VÀO GIỎ HÀNG</button>
+                </form>
+
+                <div id="cartStatus" class="mt-3 p-2 text-center rounded d-none" style="font-size: 14px;"></div>
+
+                @if (!string.IsNullOrEmpty(Model.MoTa))
+                {
+                    <div class="pd-description">
+                        <h5>MÔ TẢ SẢN PHẨM</h5>
+                        <p>@Model.MoTa</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $('#addToCartForm').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                var data = form.serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            // Cập nhật số lượng trên header
+                            $('.badge.rounded-pill.bg-danger').text(response.count);
+                            
+                            // Hiển thị thông báo thành công
+                            var status = $('#cartStatus');
+                            status.html('✔ Đã thêm vào giỏ hàng thành công!')
+                                  .removeClass('d-none alert-danger')
+                                  .addClass('alert alert-success mt-3');
+                            
+                            // Ẩn thông báo sau 3 giây
+                            setTimeout(function() {
+                                status.fadeOut(function() {
+                                    $(this).addClass('d-none').show();
+                                });
+                            }, 3000);
+                        }
+                    },
+                    error: function() {
+                        var status = $('#cartStatus');
+                        status.html('Có lỗi xảy ra, vui lòng thử lại!')
+                              .removeClass('d-none alert-success')
+                              .addClass('alert alert-danger mt-3');
+                    }
+                });
+            });
+        });
+    </script>
+}

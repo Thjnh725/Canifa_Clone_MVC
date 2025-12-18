@@ -1,0 +1,104 @@
+@model IEnumerable<Canifa_Clone.Models.CartItemVM>
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<div class="container mt-4 mb-5" style="min-height: 60vh;">
+    <h3 class="mb-4 text-uppercase fw-bold" style="font-size: 24px;">GIỎ HÀNG CỦA BẠN (@(ViewBag.Count ?? 0) sản phẩm)</h3>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            <!-- Danh sách sản phẩm -->
+            <div class="col-lg-8">
+                <div class="cart-items bg-white rounded shadow-sm">
+                    @foreach (var item in Model)
+                    {
+                        <div class="cart-item-row p-3 border-bottom d-flex align-items-center">
+                            <div class="cart-item-img me-3">
+                                <img src="@Url.Content("~/Content/" + item.AnhSP)" alt="@item.TenSP" style="width: 100px; height: 130px; object-fit: cover;">
+                            </div>
+                            <div class="cart-item-info flex-grow-1">
+                                <h6 class="mb-1 fw-bold text-uppercase">@item.TenSP</h6>
+                                <p class="mb-1 text-muted small">Màu sắc: @item.TenMau | Kích cỡ: @item.TenSize</p>
+                                <div class="d-flex align-items-center mt-2">
+                                    <div class="input-group input-group-sm" style="width: 110px;">
+                                        <button class="btn btn-outline-secondary btn-minus" type="button" 
+                                                onclick="updateQty(@item.MaSP, @item.MaMau, @item.MaSize, @(item.SoLuong - 1))">-</button>
+                                        <input type="text" class="form-control text-center bg-white" value="@item.SoLuong" readonly>
+                                        <button class="btn btn-outline-secondary btn-plus" type="button" 
+                                                onclick="updateQty(@item.MaSP, @item.MaMau, @item.MaSize, @(item.SoLuong + 1))">+</button>
+                                    </div>
+                                    <span class="ms-3 fw-bold text-danger">@String.Format("{0:N0}", item.GiaBan) ₫</span>
+                                </div>
+                            </div>
+                            <div class="cart-item-actions ms-3">
+                                <a href="@Url.Action("RemoveFromCart", "Cart", new { maSP = item.MaSP, maMau = item.MaMau, maSize = item.MaSize })" 
+                                   class="text-muted" title="Xóa khỏi giỏ">
+                                    <i class="bi bi-trash3 fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Tóm tắt đơn hàng -->
+            <div class="col-lg-4">
+                <div class="cart-summary p-4 bg-white rounded shadow-sm sticky-top" style="top: 100px;">
+                    <h5 class="mb-4 fw-bold">TỔNG ĐƠN HÀNG</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tổng tiền hàng:</span>
+                        <span class="fw-bold">@String.Format("{0:N0}", ViewBag.TotalAmount) ₫</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 text-success">
+                        <span>Phí vận chuyển:</span>
+                        <span>Miễn phí</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold fs-5">TỔNG CỘNG:</span>
+                        <span class="fw-bold fs-5 text-danger">@String.Format("{0:N0}", ViewBag.TotalAmount) ₫</span>
+                    </div>
+                    <button class="btn btn-dark w-100 py-3 fw-bold text-uppercase">THANH TOÁN NGAY</button>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-dark w-100 mt-2 py-2">TIẾP TỤC MUA SẮM</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-bag-x" style="font-size: 64px; color: #dee2e6;"></i>
+            </div>
+            <h4>Giỏ hàng của bạn đang trống</h4>
+            <p class="text-muted">Hãy lấy ngay những món đồ bạn yêu thích</p>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-dark px-5 py-2 mt-3 fw-bold text-uppercase">TIẾP TỤC MUA SẮM</a>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .cart-item-row:hover {
+        background-color: #fafafa;
+    }
+    .btn-minus, .btn-plus {
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<script>
+    function updateQty(maSP, maMau, maSize, quantity) {
+        if (quantity < 1) return;
+        window.location.href = '@Url.Action("UpdateQuantity", "Cart")' + 
+            '?maSP=' + maSP + '&maMau=' + maMau + '&maSize=' + maSize + '&quantity=' + quantity;
+    }
+</script>
